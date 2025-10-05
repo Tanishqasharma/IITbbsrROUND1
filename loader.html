@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Second Progress Loader</title>
+    <!-- Font for the Counter (Optional but good for a digital look) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bar-color: #007bff; /* Bright blue for the bar */
+            --main-bg: #000;
+            --duration: 5s; /* Total time for animation and JS timer */
+        }
+
+        /* 1. Loader Screen Styles */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--main-bg);
+            display: flex;
+            flex-direction: column; /* Stack bar and counter vertically */
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+            z-index: 9999;
+        }
+
+        /* State for hiding the loader after 5 seconds */
+        .loaded #loader-wrapper {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        /* 2. Loader Bar Container (Outer Track) */
+        .loader {
+            width: 300px; 
+            height: 8px;
+            background-color: #333; 
+            border-radius: 4px;
+            overflow: hidden;
+            transform: scale(1.2); 
+            margin-bottom: 20px; /* Space between bar and counter */
+        }
+        
+        /* 3. The Actual Progress Bar */
+        .progress-bar {
+            height: 100%;
+            width: 0%; 
+            background-color: var(--bar-color);
+            border-radius: 4px;
+            
+            /* Animation: Grow from 0% to 100% over the full 5 seconds */
+            animation: progressBarGrow var(--duration) linear forwards;
+        }
+
+        /* 4. Numerical Counter Style */
+        .counter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bar-color);
+        }
+
+        /* 5. Keyframes for the linear growth animation */
+        @keyframes progressBarGrow {
+            0% { 
+                width: 0%; 
+            }
+            100% { 
+                width: 100%; 
+            }
+        }
+        
+        /* 6. Main Content (Hidden until loaded) */
+        #main-content {
+            padding: 50px;
+            text-align: center;
+            font-family: sans-serif;
+            color: #ccc;
+            font-size: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body id="page-body">
+    <!-- Loader Wrapper -->
+    <div id="loader-wrapper">
+        <!-- Progress Bar -->
+        <div class="loader">
+            <div class="progress-bar"></div>
+        </div>
+        <!-- Numerical Counter -->
+        <div id="loading-counter" class="counter">0%</div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="main-content">
+        <h1>Content Loaded Successfully!</h1>
+        <p>The loader ran for 5 seconds.</p>
+    </div>
+
+    <script>
+        // Set the duration for the loader to run (5000 milliseconds = 5 seconds)
+        const LOAD_DURATION = 5000;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.getElementById('page-body');
+            const content = document.getElementById('main-content');
+            const counterElement = document.getElementById('loading-counter');
+            
+            // --- Counter Logic (Runs from 0 to 100) ---
+            let currentValue = 0;
+            const targetValue = 100;
+            // Update counter slightly faster than animation duration (LOAD_DURATION * 0.9)
+            const interval = setInterval(() => {
+                if (currentValue < targetValue) {
+                    currentValue++;
+                    counterElement.textContent = currentValue + '%';
+                } else {
+                    clearInterval(interval);
+                }
+            }, (LOAD_DURATION * 0.9) / targetValue); 
+            
+            // --- Master Timeout (Hides the loader) ---
+            setTimeout(() => {
+            // Redirect to the new page
+            window.location.href = 'parallax.html';
+                
+            }, LOAD_DURATION);
+        });
+    </script>
+</body>
+</html>
