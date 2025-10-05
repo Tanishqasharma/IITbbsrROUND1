@@ -1,0 +1,233 @@
+/* --- Global Reset and Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #e5004e; /* The dominant red/pink color from the video */
+    --secondary-color: #1a1a1a;
+    --text-color-light: #fff;
+    --text-color-dark: #333;
+    --transition-speed: 0.6s;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color-light);
+    overflow: hidden; /* Hide scrollbars, JS will control scrolling simulation */
+}
+
+/* --- App Container and Layout --- */
+#showcase-app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--text-color-light); /* Base background is white */
+}
+
+/* --- Background Elements (Fixed Position) --- */
+#background-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#fixed-color-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    /* Initial state transformation for the first slide */
+    transform: translateX(0); 
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+#case-number {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 50vw; /* Huge font size relative to viewport width */
+    color: rgba(255, 255, 255, 0.4); /* Transparent white */
+    right: -10vw;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Data attribute content for the large number */
+#case-number::before {
+    content: attr(data-number);
+    display: block;
+    line-height: 1;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+/* --- Content Wrapper (Moves vertically) --- */
+#content-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Above the background */
+    overflow: hidden;
+}
+
+#cases-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+/* --- Individual Case Slide Layout (Adjusted for 4 slides) --- */
+.case-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 0 5vw;
+    color: var(--text-color-light);
+    position: absolute; /* Allows vertical stacking */
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.case-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Calculate vertical position for each slide */
+.case-slide[data-index="1"] { top: 0vh; }
+.case-slide[data-index="2"] { top: 100vh; }
+.case-slide[data-index="3"] { top: 200vh; }
+.case-slide[data-index="4"] { top: 300vh; } /* Position for Slide 4 */
+
+/* Left Content Area (Title and Tags) */
+.content-left {
+    width: 45%;
+    padding-right: 5vw;
+    text-align: left;
+}
+
+.content-left .title {
+    font-size: 4vw; /* Responsive title size */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: var(--secondary-color); /* Title is dark/black */
+}
+
+.content-right {
+    width: 45%;
+    padding-left: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.case-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+/* --- Tags and Read More Button --- */
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+}
+
+.tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+.tag.b2e { border-color: #4a4a4a; color: #4a4a4a; }
+.tag.international { border-color: #007bff; color: #007bff; }
+.tag.brand { border-color: orange; color: orange; } /* Styling for brand tag */
+
+
+.read-more {
+    display: inline-block;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--secondary-color);
+    transition: border-color 0.3s;
+}
+.read-more:hover {
+    border-color: var(--primary-color);
+}
+
+/* --- Footer CTA (Fixed) --- */
+#footer-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.cta-button {
+    background: none;
+    border: 1px solid var(--text-color-dark);
+    color: var(--text-color-dark);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
+}
+.cta-button:hover {
+    background: var(--primary-color);
+    color: var(--text-color-light);
+    border-color: var(--primary-color);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .case-slide {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 10vh;
+    }
+    .content-left, .content-right {
+        width: 100%;
+        padding: 0 5vw;
+        text-align: center;
+    }
+    .content-right {
+        margin-top: 30px;
+    }
+    .content-left .title {
+        font-size: 8vw;
+    }
+    .tags {
+        justify-content: center;
+    }
+    #case-number {
+        font-size: 80vw;
+    }
+}
