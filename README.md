@@ -20,6 +20,6 @@ The features we have used from the given drive link are:
 6.parallax animation
 7.showcase work
 8.testimonials
-
+9.graph
 
 
