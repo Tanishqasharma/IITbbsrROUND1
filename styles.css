@@ -1,0 +1,738 @@
+/* --- GLOBAL RESET & BASE STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: #0d111c;
+    overflow-x: hidden;
+    /* * FIX 1: Changed 'overflow-y: hidden' to 'overflow-y: auto' or 'scroll'.
+     * This is the main reason your page couldn't scroll. 
+     * The scroll-to-reveal animation requires the page to be scrollable.
+     */
+    overflow-y: auto; 
+}
+
+/* --- VIDEO BACKGROUND STYLING --- */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 28, 0.7);
+    z-index: -1;
+}
+
+/* --- CONTENT LAYER AND LAYOUT --- */
+/* This content div now only applies to the hero section */
+.content {
+    position: relative; 
+    z-index: 1; 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    height: 100vh; /* Make the hero take up the full viewport height */
+    width: 100%;
+}
+
+.ratings-bar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-hero {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.interactive-word-container {
+    position: relative; 
+    display: inline-block;
+    cursor: default;
+}
+
+.interactive-word-container .word {
+    font-weight: 700;
+    background: white; 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+}
+
+/* --- UTILITY: GLASSMORHISM CARD --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    color: white; 
+}
+
+.card-header {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* --- HOVER CARD BASE STATE (HIDDEN) --- */
+.hover-card {
+    position: fixed; 
+    z-index: 1000;
+    pointer-events: none; 
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+/* --- 1. REPORTS HOVER LOGIC AND STYLING --- */
+.reports-trigger:hover .hover-card {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; 
+}
+
+.income-expense-card {
+    top: 150px; 
+    left: 100px; 
+    width: 350px; 
+    height: 500px; 
+    padding: 20px;
+    text-align: left;
+    transform: translateX(-50px) scale(0.8);
+}
+.reports-trigger:hover .income-expense-card {
+    transform: translateX(0) scale(1);
+}
+.income-expense-card .chart-placeholder {
+    height: 60%;
+    background-color: rgba(8, 183, 99, 0.15);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+.income-expense-card .report-text {
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+.mark-bosman-card {
+    top: 150px; 
+    right: 200px; 
+    padding: 15px;
+    width: 300px; 
+    text-align: left;
+    transform: translateY(-50px) scale(0.8);
+}
+.reports-trigger:hover .mark-bosman-card {
+    transform: translateY(0) scale(1);
+}
+.mark-bosman-card .header {
+    display: flex; align-items: center; margin-bottom: 5px;
+    font-size: 0.8rem;
+}
+.mark-bosman-card .avatar {
+    width: 20px; height: 20px; font-size: 0.7rem; border-radius: 50%; background-color: #007bff;
+    display: flex; justify-content: center; align-items: center; font-weight: 700; margin-right: 8px;
+}
+.mark-bosman-card .name { font-weight: 600; margin-right: 5px; }
+.mark-bosman-card .time { opacity: 0.7; font-size: 0.65rem; }
+.mark-bosman-card .comment { font-size: 0.85rem; line-height: 1.3; margin-bottom: 8px; }
+.mark-bosman-card .reply-btn {
+    background: none; border: 1px solid rgba(255, 255, 255, 0.3); color: white;
+    padding: 3px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; transition: background-color 0.2s;
+}
+.mark-bosman-card .reply-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+
+.send-to-card {
+    top: 400px; 
+    right: 150px; 
+    width: 250px; 
+    padding: 20px;
+    text-align: left;
+    transform: scale(0.8);
+}
+.reports-trigger:hover .send-to-card {
+    transform: scale(1);
+}
+.send-to-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.send-to-grid .grid-item {
+    display: block; padding: 10px; background-color: rgba(255, 255, 255, 0.1); border-radius: 6px;
+    color: white; text-decoration: none; font-size: 0.8rem; font-weight: 500; text-align: center; transition: background-color 0.2s;
+}
+.send-to-grid .grid-item:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+.financial-score-card {
+    bottom: 30px;
+    right: 30px;
+    top: auto; left: auto;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    z-index: 150; 
+    transform: translateY(20px) scale(0.9);
+}
+.reports-trigger:hover .financial-score-card {
+    transform: translateY(0) scale(1);
+}
+.financial-score-card .heart-icon {
+    color: #ff3264; margin-right: 3px;
+}
+
+/* --- 2. FORECASTS HOVER LOGIC AND STYLING --- */
+.forecasts-trigger:hover .hover-card {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.forecast-invoices-card {
+    position: fixed;
+    top: 180px; 
+    left: 100px; 
+    width: 300px; 
+    height: 250px;
+    padding: 10px; 
+    text-align: left;
+    overflow: hidden; 
+    transform: translateX(-50px) scale(0.9);
+}
+.forecasts-trigger:hover .forecast-invoices-card {
+    transform: translateX(0) scale(1);
+}
+.invoice-table {
+    width: 100%; font-size: 0.60rem; 
+    border-collapse: collapse; margin-top: 5px; 
+}
+.invoice-table th, .invoice-table td {
+    padding: 3px 5px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); white-space: nowrap;
+}
+.invoice-table th { font-weight: 600; opacity: 0.7; }
+.forecast-invoices-card .card-header { 
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+.forecast-invoices-card .summary-text { 
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.forecast-chart-card {
+    position: fixed;
+    top: 350px; 
+    right: 50px; 
+    bottom: auto; 
+    width: 250px; 
+    height: 250px; 
+    padding: 15px;
+    text-align: center;
+    transform: scale(0.9);
+}
+.forecasts-trigger:hover .forecast-chart-card {
+    transform: scale(1);
+}
+.forecast-chart-card .chart-placeholder {
+    height: 100%; background-color: rgba(0, 0, 0, 0.1); border-radius: 6px;
+    display: flex; justify-content: center; align-items: center; font-size: 0.75rem;
+}
+
+/* --- 3. CONSOLIDATIONS HOVER LOGIC AND STYLING (DEPLOYMENT) --- */
+/* ------------------------------------------- */
+
+/* This targets the 'Deployment' span in the HTML */
+.consolidations-trigger:hover .hover-card {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* 3.1. ERP Systems (Top Tier: Frameworks/Python) */
+.consolidation-erp-card {
+    position: fixed;
+    /* Adjusted position: sits above and slightly left of the main heading */
+    top: 100px; 
+    left: 450px;
+    width: 320px; /* Reduced size */
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateY(-50px) scale(0.9);
+}
+.consolidations-trigger:hover .consolidation-erp-card {
+    transform: translateY(0) scale(1);
+}
+.consolidation-erp-card .erp-logo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #00b33c; /* Green/Python color for emphasis */
+}
+.consolidation-erp-card .plus {
+    font-size: 1.2rem;
+    color: white;
+    opacity: 0.7;
+}
+
+/* 3.2. Global Finance & Branches (Middle Tier: Architecture Tiers) */
+.consolidation-branch-card {
+    position: fixed;
+    top: 220px; /* Moves down slightly */
+    left: 300px;
+    width: 400px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateY(-50px) scale(0.9);
+}
+.consolidations-trigger:hover .consolidation-branch-card {
+    transform: translateY(0) scale(1);
+}
+.consolidation-branch-card .branch-item {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: #007bff;
+    border-radius: 4px;
+    padding: 4px 6px;
+    margin-right: 5px;
+}
+.consolidation-branch-card .branch-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* 3.3. Regional Offices (Bottom Tier: Tools/CI/CD) */
+.consolidation-region-card {
+    position: fixed;
+    top: 340px; /* Moves below the middle tier */
+    left: 300px;
+    width: 350px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateY(-50px) scale(0.9);
+}
+.consolidations-trigger:hover .consolidation-region-card {
+    transform: translateY(0) scale(1);
+}
+.consolidation-region-card .region-item {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: #007bff;
+    border-radius: 4px;
+    padding: 4px 6px;
+    margin-right: 5px;
+}
+.consolidation-region-card .region-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+/* --- CTA AND BUTTONS --- */
+.cta-area {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ai-text {
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: #ff9900;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.primary-btn {
+    padding: 12px 20px;
+    background-color: #007bff; 
+    color: white; 
+    border: none;
+    border-radius: 8px; 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, 
+        transparent 20%, 
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 80%
+    );
+    transition: transform 0.5s ease;
+    z-index: 1;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3; 
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.8), 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+.primary-btn:hover::before {
+    transform: translateX(50%);
+}
+
+.secondary-link {
+    color: white; text-decoration: none; font-weight: 500; padding: 10px; transition: opacity 0.3s;
+}
+
+/* --- CAROUSEL SECTION --- */
+.carousel-section {
+    padding: 60px 20px;
+    background: #12121a;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    margin-top: 60px; /* Gives some space after the hero */
+}
+
+.carousel-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.carousel-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.carousel-item {
+    width: 300px;
+    background: #f1f1f3;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.carousel-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.851);
+}
+
+.new-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff6b6b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    background: #ececef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* This targets the hover image to make it visible */
+.carousel-item .product-image img:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.carousel-item:hover .product-image img:first-child {
+    opacity: 0;
+    transform: scale(1.05) translateY(-10px);
+}
+
+.carousel-item:hover .product-image img:last-child {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+}
+
+.add-to-bag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(217, 217, 217);
+    color: #000;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    cursor: pointer;
+}
+
+.carousel-item:hover .add-to-bag {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.add-to-bag:hover {
+    background: #f0f0f0;
+}
+
+.customer-section {
+            position: relative; /* Crucial for positioning the button */
+            width: 100%;
+            max-width: 1200px;
+            padding: 80px 40px;
+            margin: 100px auto; /* Provides space on a scrolling page */
+            text-align: center;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* --- Logo Grid --- */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Individual Logo Styling (NEW) --- */
+        .logo-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            /* --- The Magic! Smooth transition for the blur and opacity --- */
+            transition: filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .logo-item svg {
+            max-width: 140px;
+            height: 40px;
+            fill: #ffffff;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* --- Central CTA Button (Hidden by default) --- */
+        .cta-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        visibility 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Styling */
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            border: 1px solid #333;
+            white-space: nowrap;
+        }
+
+        /* --- THE HOVER EFFECT --- */
+        /* When the entire section is hovered... */
+
+        /* 1. Blur and fade each logo item */
+        .customer-section:hover .logo-item {
+            filter: blur(8px);
+            opacity: 0.3;
+        }
+
+        /* 2. Fade in the central button */
+        .customer-section:hover .cta-button {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }/* <-- FIX: Removed invalid characters from this line */
+
+/* --- BRAND KITS CARD STYLING (STATIC) --- */
+.brand-kits-card {
+    /* Base positioning */
+    position: fixed; 
+    top: 20%;
+    right: 10%; 
+    width: 320px;
+    padding: 25px;
+    z-index: 999;
+    
+    /* Initial Hidden State */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(50px) scale(0.95); 
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    
+    /* Aesthetic styles */
+    border-radius: 20px;
+    border-top: 5px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* VISIBLE STATE - APPLIED BY JAVASCRIPT */
+.brand-kits-card.scrolled-up {
+    opacity: 1; 
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.brand-kits-card .card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.kit-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.kit-item:hover {
+    background: rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px);
+}
+
+.kit-info {
+    display: flex;
+    align-items: center;
+}
+
+.kit-icon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: white; 
+}
+
+.kit-icon.ecorp { background: #00c6ff; }
+.kit-icon.icorp { background: #ffaa00; }
+.kit-icon.agency { background: #ff5577; }
+
+.kit-name {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.kit-action-icon {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 900px) {
+    h1 { font-size: 2.5rem; }
+    .hover-card { display: none !important; } /* Hide hover cards on smaller screens */
+}
+@media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .ratings-bar { font-size: 0.7rem; gap: 10px; flex-wrap: wrap; }
+}
