@@ -1,7 +1,7 @@
 Innosphere Portfolio:
 Live Site: https://innosphere-portfolio.web.app/
 
-Overview
+Overview :
 This project serves as a dynamic, interactive portfolio for our team, demonstrating expertise in Frontend Engineering, UI/UX Design, and modern deployment architectures.
 The homepage utilizes advanced CSS techniques (Glassmorphism, fixed positioning) and custom JavaScript for highly engaging interactions, including scroll-driven animations and dynamic data visualization overlays.
 We have used multiple webpages with working buttons that are:
