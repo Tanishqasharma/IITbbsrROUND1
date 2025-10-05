@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Case Showcase</title>
+    <link rel="stylesheet" href="showcase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Main Container for the Entire Page/App -->
+    <div id="showcase-app">
+        <!-- Background Elements (The large moving number and fixed color) -->
+        <div id="background-elements">
+            <div id="fixed-color-bg"></div>
+            <div id="case-number" data-number="01"></div>
+        </div>
+
+        <!-- Scrollable/Animated Content Container -->
+        <div id="content-container">
+            <div id="cases-wrapper">
+                
+                <!-- CASE 1: SWITCH - SOPRA STERIA -->
+                <section class="case-slide active" data-index="1">
+                    <div class="content-left">
+                        <h2 class="title">CIA<br>By GDG On-Campus<br>2025</h2>
+                        <div class="tags">
+                            <span class="tag">CGU</span>
+                            <span class="tag b2e">HACKATHON</span>
+                        </div>
+                        <a href="testimonials.html" class="read-more">READ MORE -></a>
+                    </div>
+                    <div class="content-right">
+                        <img src="cialogo.png" alt="cialogo" class="case-image">
+                    </div>
+                </section>
+
+                <!-- CASE 2: GRAND HOTEL OSLO -->
+                <section class="case-slide" data-index="2">
+                    <div class="content-left">
+                        <h2 class="title">Google Solution Challenge<br>By GOOGLE'25</h2>
+                        <div class="tags">
+                            <span class="tag international">GOOGLE</span>
+                            <span class="tag">ONLINE</span>
+                            <span class="tag brand">HACKATHON</span>
+                        </div>
+                        <a href="testimonials.html" class="read-more">READ MORE -></a>
+                    </div>
+                    <div class="content-right">
+                        <img src="gdglogo.png" alt="gdg logo" class="case-image">
+                    </div>
+                </section>
+
+                <!-- CASE 3: INFORMAL MEETING -->
+                <section class="case-slide" data-index="3">
+                    <div class="content-left">
+                        <h2 class="title">ADOBE HACKATHON<br>By ADOBE INDIA</h2>
+                        <div class="tags">
+                            <span class="tag">ADOBE</span>
+                            <span class="tag b2e">HACKATHON</span>
+                        </div>
+                        <a href="testimonials.html" class="read-more">READ MORE -></a>
+                    </div>
+                    <div class="content-right">
+                        <img src="adobelogo.png" alt="adobelogo" class="case-image">
+                    </div>
+                </section>
+                
+                <!-- CASE 4: NEW SLIDE (Added for TOTAL_SLIDES = 4) -->
+                <section class="case-slide" data-index="4">
+                    <div class="content-left">
+                        <h2 style="color: aliceblue;">SIH<br>SMART INDIA HACKATHON<br>By GOV-IN</h2>
+                        <div class="tags">
+                            <span class="tag brand">SIH</span>
+                            <span class="tag international">GOV-IN</span>
+                        </div>
+                        <a href="testimonials.html" style="display: inline-block;
+                        color: aliceblue;
+                        text-decoration: none;
+                        font-weight: 700;
+                        padding: 10px 0;
+                        border-bottom: 2px solid var(--secondary-color);
+                        transition: border-color 0.3s;">
+                        READ MORE -></a>
+                    </div>
+                    <div class="content-right">
+                        <img src="sihlogo.png" alt="sihlogo" class="case-image">
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Fixed Footer/CTA -->
+        <div id="footer-cta">
+            <button onclick="window.location.href='testimonials.html'" class="cta-button">VIEW ALL CASES</button>
+        </div>
+    </div>
+
+    <script src="showcase.js"></script>
+</body>
+</html>
